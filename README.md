@@ -1,5 +1,5 @@
 # faucet-kovan
 
 ### Contract Address
- 
-0x8727cb60c21cdB519e0a6492aCd554CE899642Ec
+
+Kovan: 0x543a01bA99f0ca6475fEA8e5cFD1434D0df71cb5
