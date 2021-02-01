@@ -1,7 +1,7 @@
 pragma solidity 0.5.17;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-
+import "./libs/Address.sol";
 contract Faucet {
 
     mapping(address => uint256) public withdrawAuth;
@@ -11,7 +11,7 @@ contract Faucet {
     mapping(address => uint256) public tokensInfo;
 
     address public core;
-
+    using AddressHelper for address;
 
     constructor() public{
         core = msg.sender;
@@ -26,7 +26,7 @@ contract Faucet {
                 if (tokens[i].balanceOf(address(this)) > per) {
                     address _address = address(tokens[i]);
                     emit Withdraw(msg.sender, _address, tokensInfo[address(tokens[i])]);
-                    tokens[i].transfer(msg.sender, per);
+                    address(tokens[i]).safeTransfer(msg.sender, per);
                 }
             }
 
@@ -61,7 +61,7 @@ contract Faucet {
                 delete tokensInfo[address(_token)];
                 uint256 balance = _token.balanceOf(address(this));
                 if (balance > 0) {
-                    _token.transfer(core, _token.balanceOf(address(this)));
+                    address(_token).safeTransfer(core, _token.balanceOf(address(this)));
                 }
                 emit RemoveToken(address(_token));
                 break;
