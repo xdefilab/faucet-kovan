@@ -1,7 +1,7 @@
 pragma solidity 0.5.17;
 
 import "./IERC20.sol";
-import "./Address.sol";
+import "./AddressHelper.sol";
 
 contract Faucet {
     using AddressHelper for address;
